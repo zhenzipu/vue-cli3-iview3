@@ -1,40 +1,78 @@
+<style>
+.layout {
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.layout-footer-center {
+    text-align: center;
+}
+</style>
+
 <template>
-    <div id="nav">
-        <!-- <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> -->
-        <sidebar-menu :menu-theme="theme" :menu-list="menuList" :open-names="openNames" @on-change="handleChange"></sidebar-menu>
-        <div>
-            <router-view></router-view>
-        </div>
+    <div class="layout">
+        <Layout>
+            <Header>
+                <menu-header :userName="userName" :menu-theme="theme" :menu-list="menuList" :open-names="openNames" @on-change="handleChange"></menu-header>
+            </Header>
+            <Content :style="{padding: '0 50px'}">
+                <Breadcrumb :style="{margin: '20px 0'}">
+                    <BreadcrumbItem>Home</BreadcrumbItem>
+                    <BreadcrumbItem>Components</BreadcrumbItem>
+                    <BreadcrumbItem>Layout</BreadcrumbItem>
+                </Breadcrumb>
+                <router-view></router-view>
+            </Content>
+            <Footer class="layout-footer-center">2018-2019 &copy; JDCloud</Footer>
+        </Layout>
     </div>
 </template>
 <script>
-import sidebarMenu from './main-components/sidebarMenu.vue';
+import menuHeader from './main-components/menuHeader.vue';
 export default {
     components: {
-        sidebarMenu
+        menuHeader
     },
     data() {
         return {
-            theme: 'primary',
+            userName: 'test',
+            theme: 'dark',
             menuList: [
                 {
-                    title: '111',
-                    path: '/home',
-                    name: 'home',
-                    icon: 'md-add',
+                    name: '主菜单',
+                    icon: 'ios-paper',
                     children: [
                         {
-                            title: '222',
-                            path: '/home2',
-                            name: 'about',
-                            icon: 'md-add'
+                            title: '首页',
+                            path: '/home',
+                            name: 'home',
+                            icon: 'ios-people'
                         },
                         {
-                            title: '555',
-                            path: '/home5',
-                            name: 'main',
-                            icon: 'md-add'
+                            title: '关于',
+                            path: '/about',
+                            name: 'about',
+                            icon: 'ios-stats'
+                        }
+                    ]
+                },
+                {
+                    name: '报表系统',
+                    icon: 'ios-construct',
+                    children: [
+                        {
+                            title: '覆盖率',
+                            path: '/coverage',
+                            name: 'coverage',
+                            icon: 'ios-analytics'
+                        },
+                        {
+                            title: '报表',
+                            path: '/report',
+                            name: 'report',
+                            icon: 'ios-filing'
                         }
                     ]
                 }
